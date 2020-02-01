@@ -1,10 +1,12 @@
 package org.example.quoters.service.impl;
 
 import org.example.quoters.annotations.InjectRandomInt;
+import org.example.quoters.annotations.Profiling;
 import org.example.quoters.service.Quoter;
 
 import javax.annotation.PostConstruct;
 
+@Profiling
 public class TerminatorQuoter implements Quoter {
 
     @InjectRandomInt(min = 2, max = 7)
