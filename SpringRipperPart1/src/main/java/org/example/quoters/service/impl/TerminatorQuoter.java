@@ -1,6 +1,7 @@
 package org.example.quoters.service.impl;
 
 import org.example.quoters.annotations.InjectRandomInt;
+import org.example.quoters.annotations.PostProxy;
 import org.example.quoters.annotations.Profiling;
 import org.example.quoters.service.Quoter;
 
@@ -28,7 +29,9 @@ public class TerminatorQuoter implements Quoter {
     }
 
     @Override
+    @PostProxy
     public void sayQuote() {
+        System.out.println("Phase 3");
         for (int i = 0; i < repeat; i++) {
             System.out.println(message);
         }

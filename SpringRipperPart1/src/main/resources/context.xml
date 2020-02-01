@@ -19,5 +19,6 @@
 
     <bean class="org.example.quoters.postProcessors.InjectRandomIntAnnotationBeanPostProcessor" />
     <bean class="org.example.quoters.postProcessors.ProfilingHandlerBeanPostProcessor" />
+    <bean class="org.example.quoters.listener.PostProxyInvokerContextListener" />
 
 </beans>
