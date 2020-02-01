@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>SpringRipperPart1</module>
+        <module>SpringRipperPart2</module>
     </modules>
     <name>ParentSpringBorisov</name>
     <description>Parent pom file for Spring presentations made by E. Borisov</description>
