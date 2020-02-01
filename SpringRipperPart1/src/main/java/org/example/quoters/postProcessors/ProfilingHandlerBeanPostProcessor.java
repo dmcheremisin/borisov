@@ -6,11 +6,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
 import javax.management.MBeanServer;
-import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 import java.lang.management.ManagementFactory;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,20 +35,17 @@ public class ProfilingHandlerBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Class beanClass = map.get(beanName);
         if (beanClass != null) {
-            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), new InvocationHandler() {
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                    if (controller.isEnabled()) {
-                        System.out.println("Profiling...");
-                        long before = System.nanoTime();
-                        Object returnValue = method.invoke(bean, args);
-                        long after = System.nanoTime();
-                        System.out.println("Timing: " + (after - before));
-                        System.out.println("Ended profiling");
-                        return returnValue;
-                    }
-                    return method.invoke(bean, args);
+            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> {
+                if (controller.isEnabled()) {
+                    System.out.println("Profiling...");
+                    long before = System.nanoTime();
+                    Object returnValue = method.invoke(bean, args);
+                    long after = System.nanoTime();
+                    System.out.println("Timing: " + (after - before));
+                    System.out.println("Ended profiling");
+                    return returnValue;
                 }
+                return method.invoke(bean, args);
             });
         }
         return bean;
