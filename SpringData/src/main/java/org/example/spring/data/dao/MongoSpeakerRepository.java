@@ -12,7 +12,9 @@ import java.util.stream.Collectors;
 
 public interface MongoSpeakerRepository extends MongoRepository<Speaker, Long> {
 
-    Speaker findByName(String name);
+    List<Speaker> findByName(String name);
+
+    List<Speaker> findByNameContainingIgnoreCase(String name);
 
     List<Speaker> findByTalksTitleLikeIgnoreCase(String partOfTalkTitle);
 
@@ -26,11 +28,11 @@ public interface MongoSpeakerRepository extends MongoRepository<Speaker, Long> {
         return speakers.stream()
                 .map(Speaker::getTalks)
                 .flatMap(Collection::stream)
-                .filter(talk -> isBetween(from, to, talk))
+                .filter(talk -> isBetween(talk, from, to))
                 .collect(Collectors.toList());
     }
 
-    default boolean isBetween(LocalDateTime from, LocalDateTime to, Talk talk){
+    default boolean isBetween(Talk talk, LocalDateTime from, LocalDateTime to){
         return talk.getDateTime().isAfter(from) && talk.getDateTime().isBefore(to);
     }
 }
