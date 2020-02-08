@@ -12,9 +12,10 @@
         <module>SpringRipperPart1</module>
         <module>SpringRipperPart2</module>
         <module>SpringData</module>
+        <module>SpringPuzzlers</module>
     </modules>
     <name>ParentSpringBorisov</name>
-    <description>Parent pom file for Spring presentations made by E. Borisov</description>
+    <description>Parent pom file for Spring presentations made org E. Borisov</description>
 
     <properties>
         <java.version>11</java.version>
@@ -29,6 +30,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${spring.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
                 <version>${spring.framework.version}</version>
             </dependency>
             <dependency>
