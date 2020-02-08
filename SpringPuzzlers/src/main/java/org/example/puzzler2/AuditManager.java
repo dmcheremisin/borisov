@@ -4,7 +4,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuditManager {
-    public void audit() {
-        System.out.println("AuditManager.audit()");
+
+    public void audit(String methodName) {
+        System.out.println("AuditManager is invoked for method --> " + methodName);
     }
+
 }

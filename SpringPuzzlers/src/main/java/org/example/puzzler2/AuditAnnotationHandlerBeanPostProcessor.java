@@ -28,26 +28,40 @@ public class AuditAnnotationHandlerBeanPostProcessor implements BeanPostProcesso
         map = new HashMap<>();
     }
 
+    /*
+    Запоминаем все бины у которых есть аннотация Audit в мапу для того, чтобы потом по бин нейму достать.
+     */
+
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         Class<?> beanClass = bean.getClass();
-        Method[] methods = beanClass.getMethods();
-        boolean isAnnotationAudit = Arrays.stream(methods)
-                .anyMatch(method -> method.isAnnotationPresent(Audit.class));
-        if (isAnnotationAudit) map.put(beanName, beanClass);
+
+        if (beanClass.isAnnotationPresent(Audit.class))
+            map.put(beanName, beanClass);
+
         return bean;
     }
 
+    /*
+    В этот метод приходит объект bean. Это будет оригинальный объект или уже прокси мы не знаем, но скорее всего прокси.
+    Прокси - это абсолютно другой объект, у которого нет оригинальных аннотаций.
+    Соответсвенно нужно найти в мапе тот, оригинальный объект, по запомненному бин нейму.
+    Если он есть, значит нужно обогатить его методы нужным функционалом.
+     */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (map.containsKey(beanName)) {
             Class beanClass = map.get(beanName);
-            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> {
-                Object invoke = method.invoke(bean, args);
-                auditManager.audit();
-                return invoke;
-            });
+
+            if (beanClass.isAnnotationPresent(Audit.class))
+                return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> {
+                    Object invoke = method.invoke(bean, args);
+                    auditManager.audit(method.getName());
+                    return invoke;
+                });
+
         }
+
         return bean;
     }
 }

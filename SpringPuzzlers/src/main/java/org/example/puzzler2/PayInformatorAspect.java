@@ -8,11 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class PayInformatorAspect {
+
     @Pointcut("execution(* org.example.puzzler2..*.pay*(..))")
     public void allPayMethods() {}
 
     @After("allPayMethods()")
     public void info() {
-        System.out.println("PayInformatorAspect.info()");
+        System.out.println("Payment aspect is invoked");
     }
+
 }

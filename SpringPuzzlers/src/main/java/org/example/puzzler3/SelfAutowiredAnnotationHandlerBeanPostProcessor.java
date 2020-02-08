@@ -18,7 +18,8 @@ public class SelfAutowiredAnnotationHandlerBeanPostProcessor implements BeanPost
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         Field[] fields = bean.getClass().getDeclaredFields();
-        boolean isAnnotationSelfAutowired = Arrays.stream(fields).anyMatch(field -> field.isAnnotationPresent(SelfAutowired.class));
+        boolean isAnnotationSelfAutowired = Arrays.stream(fields)
+                .anyMatch(field -> field.isAnnotationPresent(SelfAutowired.class));
         if (isAnnotationSelfAutowired)
             map.put(beanName, bean);
         return bean;
@@ -32,7 +33,8 @@ public class SelfAutowiredAnnotationHandlerBeanPostProcessor implements BeanPost
         if (map.containsKey(beanName)) {
             Object originalBean = map.get(beanName);
             Field[] fields = originalBean.getClass().getDeclaredFields();
-            Arrays.stream(fields).filter(field -> field.isAnnotationPresent(SelfAutowired.class)).forEach(field -> {
+            Arrays.stream(fields)
+                    .filter(field -> field.isAnnotationPresent(SelfAutowired.class)).forEach(field -> {
                 field.setAccessible(true);
                 ReflectionUtils.setField(field, originalBean, bean);
             });
