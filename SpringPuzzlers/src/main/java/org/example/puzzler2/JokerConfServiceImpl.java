@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Audit
+
 @Component
 public class JokerConfServiceImpl implements JokerConfService {
 
@@ -13,6 +13,7 @@ public class JokerConfServiceImpl implements JokerConfService {
         System.out.println("JokerConfServiceImpl --> setup()");
     }
 
+    @Audit
     public void pay() {
         System.out.println("JokerConfServiceImpl --> pay()");
     }

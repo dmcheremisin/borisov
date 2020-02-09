@@ -1,7 +1,10 @@
 package org.example.puzzler2;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @ComponentScan("org.example.puzzler2")
@@ -13,13 +16,10 @@ public class Main {
         JokerConfService service = applicationContext.getBean(JokerConfService.class);
         service.pay();
         service.info();
-        /*
-        JokerConfServiceImpl --> setup()
-        JokerConfServiceImpl --> pay()
-        Payment aspect is invoked
-        AuditManager is invoked for method --> pay
-        JokerConfServiceImpl --> info()
-        AuditManager is invoked for method --> info
-         */
+        //JokerConfServiceImpl --> setup()
+        //AuditManager is invoked for method --> pay
+        //JokerConfServiceImpl --> pay()
+        //Payment aspect is invoked
+        //JokerConfServiceImpl --> info()
     }
 }

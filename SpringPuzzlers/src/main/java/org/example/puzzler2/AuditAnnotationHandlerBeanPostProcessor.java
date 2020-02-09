@@ -8,7 +8,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /*
 Правило: Все проксирование засовываем в postProcessAfterInitialization, так как можем сломать BeanPostProcessor-ы спринга
@@ -21,7 +23,7 @@ import java.util.Map;
 @Component
 public class AuditAnnotationHandlerBeanPostProcessor implements BeanPostProcessor {
     private final AuditManager auditManager;
-    private Map<String, Class> map;
+    private Map<String, Pair<Class, List<Method>>> map;
 
     public AuditAnnotationHandlerBeanPostProcessor(AuditManager auditManager) {
         this.auditManager = auditManager;
@@ -35,9 +37,12 @@ public class AuditAnnotationHandlerBeanPostProcessor implements BeanPostProcesso
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         Class<?> beanClass = bean.getClass();
-
-        if (beanClass.isAnnotationPresent(Audit.class))
-            map.put(beanName, beanClass);
+        List<Method> declaredMethods = Arrays.asList(beanClass.getDeclaredMethods());
+        List<Method> auditMethods = declaredMethods.stream()
+                .filter(m -> m.isAnnotationPresent(Audit.class))
+                .collect(Collectors.toList());
+        if (!auditMethods.isEmpty())
+            map.put(beanName, new Pair<>(beanClass, auditMethods));
 
         return bean;
     }
@@ -51,15 +56,15 @@ public class AuditAnnotationHandlerBeanPostProcessor implements BeanPostProcesso
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (map.containsKey(beanName)) {
-            Class beanClass = map.get(beanName);
+            Class beanClass = map.get(beanName).getKey();
+            List<Method> auditMethods = map.get(beanName).getValue();
 
-            if (beanClass.isAnnotationPresent(Audit.class))
-                return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> {
-                    Object invoke = method.invoke(bean, args);
+            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> {
+                if (auditMethods.stream().anyMatch(m -> m.getName().equals(method.getName())))
                     auditManager.audit(method.getName());
-                    return invoke;
-                });
 
+                return method.invoke(bean, args);
+            });
         }
 
         return bean;
