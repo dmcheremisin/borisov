@@ -13,6 +13,7 @@
         <module>SpringRipperPart2</module>
         <module>SpringData</module>
         <module>SpringPuzzlers</module>
+        <module>SpringPuzzler2</module>
     </modules>
     <name>ParentSpringBorisov</name>
     <description>Parent pom file for Spring presentations made org E. Borisov</description>
