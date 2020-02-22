@@ -6,6 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
         new AnnotationConfigApplicationContext("org.example.puzzler1");
+        //вода грейся...
+        //разогреваюсь...
+        //разогреваюсь медленно...
     }
 
 }

@@ -7,7 +7,7 @@ public class SolderingIron implements Iron {
 
     @Override
     public void heat() {
-        System.out.println("Разогреваюсь медленно...");
+        System.out.println("разогреваюсь медленно...");
     }
 
 }
