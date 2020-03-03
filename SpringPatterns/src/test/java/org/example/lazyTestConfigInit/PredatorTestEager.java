@@ -8,9 +8,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
+/*
+Будут созданы все бины
+ */
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = MockConf.class)
-public class MainTest {
+@ContextConfiguration(classes = MockConfigurationEager.class)
+public class PredatorTestEager {
 
     @Autowired
     private Billy billy;

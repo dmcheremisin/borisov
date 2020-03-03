@@ -15,3 +15,5 @@ Slides https://www.slideshare.net/evgenyborisov37625/spring-puzzlers
 - Spring Puzzler 2 - https://youtu.be/BFEgLtFLdRI Евгений Борисов — Spring Puzzlers: второй сезон
 
 - Spring Deep - https://youtu.be/nGfeSo52_8A Евгений Борисов — Spring – Глубоко и не очень
+
+- Spring Patterns - https://www.youtube.com/watch?v=zLFgvdHUlA0 - Spring паттерны
