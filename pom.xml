@@ -16,6 +16,7 @@
         <module>SpringPuzzler2</module>
         <module>SpringPatterns</module>
         <module>SpringDeep</module>
+        <module>SpringDeepSpringBoot</module>
     </modules>
     <name>ParentSpringBorisov</name>
     <description>Parent pom file for Spring presentations made org E. Borisov</description>
