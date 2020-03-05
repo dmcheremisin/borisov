@@ -1,4 +1,4 @@
-package org.example.springdeep;
+package org.example.circularDependency;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

@@ -1,4 +1,4 @@
-package org.example.springdeep;
+package org.example.circularDependency;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

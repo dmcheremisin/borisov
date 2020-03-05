@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.example.bppForSpringBoot.config.InitAnnotationConfig
+# эта штука нужна для спрингбута, чтобы можно было просто заимпортить зависимость на модуль(jar) и аннотации сами заработали
