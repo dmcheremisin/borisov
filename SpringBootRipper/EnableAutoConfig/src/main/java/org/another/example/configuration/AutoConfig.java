@@ -2,6 +2,7 @@ package org.another.example.configuration;
 
 import org.another.example.annotation.ConditionOnProduction;
 import org.another.example.listener.RavenListener;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ public class AutoConfig {
     @Bean
     @ConditionOnProduction // will ask for the first time about - is it production?
     @ConditionalOnProperty("raven.whereToGo")
+    @ConditionalOnMissingBean
     public RavenListener getRavenListener(RavenProperties ravenProperties) {
         return new RavenListener(ravenProperties);
     }
