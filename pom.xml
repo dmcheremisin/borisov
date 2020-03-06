@@ -17,6 +17,7 @@
         <module>SpringPatterns</module>
         <module>SpringDeep</module>
         <module>SpringDeepSpringBoot</module>
+        <module>SpringBootRipper</module>
     </modules>
     <name>ParentSpringBorisov</name>
     <description>Parent pom file for Spring presentations made org E. Borisov</description>
