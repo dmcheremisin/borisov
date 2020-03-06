@@ -1,0 +1,17 @@
+{
+    "hints": [],
+    "groups": [
+        {
+            "sourceType": "org.another.example.configuration.RavenProperties",
+            "name": "raven",
+            "type": "org.another.example.configuration.RavenProperties"
+        }
+    ],
+    "properties": [
+        {
+            "sourceType": "org.another.example.configuration.RavenProperties",
+            "name": "raven.whereToGo",
+            "type": "java.util.List<java.lang.String>"
+        }
+    ]
+}

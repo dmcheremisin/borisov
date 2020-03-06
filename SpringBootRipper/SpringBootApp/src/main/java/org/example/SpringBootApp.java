@@ -8,7 +8,10 @@ public class SpringBootApp {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootApp.class, args);
-		//A raven was sent to Westeros
+		//Checked production 2 times:
+		//String bean requested
+		//A raven was sent to: Westeros
+		//A raven was sent to: Bravos
 	}
 
 }
