@@ -1,0 +1,6 @@
+raven:
+  whereToGo: Westeros, Braavos
+  enabled: true
+
+stringBean:
+  enabled: true

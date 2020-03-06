@@ -10,5 +10,6 @@ import java.util.List;
 public class RavenProperties {
 
     List<String> whereToGo;
+    boolean enabled;
 
 }
