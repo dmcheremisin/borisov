@@ -4,3 +4,6 @@ raven:
 
 stringBean:
   enabled: true
+
+ironbank:
+  possiblyReturnMoney: Lannister, Talli
