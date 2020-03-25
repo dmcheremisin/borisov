@@ -4,3 +4,8 @@ raven:
 
 stringBean:
   enabled: true
+
+ironbank:
+  possiblyReturnMoney: Lannister, Talli
+
+temperature: -10
