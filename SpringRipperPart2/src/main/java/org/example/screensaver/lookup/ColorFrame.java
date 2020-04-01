@@ -1,10 +1,15 @@
-package org.example.screensaver;
+package org.example.screensaver.lookup;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public abstract class ColorFrame extends JFrame {
+@Component
+public class ColorFrame extends JFrame {
 
     public ColorFrame() {
         setSize(200, 200);
@@ -12,6 +17,7 @@ public abstract class ColorFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    @Autowired
     public void showOnRandomPlace() {
         Random random = new Random();
         setLocation(random.nextInt(1200), random.nextInt(700));
@@ -19,5 +25,8 @@ public abstract class ColorFrame extends JFrame {
         repaint();
     }
 
-    protected abstract Color getColor();
+    @Lookup("color")
+    public Color getColor(){
+        return null;
+    }
 }

@@ -1,4 +1,4 @@
-package org.example.screensaver;
+package org.example.screensaver.customScope;
 
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;

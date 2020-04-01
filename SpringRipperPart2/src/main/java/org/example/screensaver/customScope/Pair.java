@@ -1,4 +1,4 @@
-package org.example.screensaver;
+package org.example.screensaver.customScope;
 
 public class Pair<K, V> {
 
